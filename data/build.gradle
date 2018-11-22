@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(":domain")
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    def retrofitVersion = globalConfiguration['retrofit_version']
+    def supportVersion = globalConfiguration['support_version']
+    def rxJavaVersion = globalConfiguration['rx_java_version']
+    def rxAndroidVersion = globalConfiguration['rx_android_version']
+    def rxKotlinVersion = globalConfiguration['rx_kotlin_version']
+    def daggerVersion = globalConfiguration['dagger_version']
+
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+
+    // dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}
