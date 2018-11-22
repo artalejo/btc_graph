@@ -7,7 +7,6 @@ import artalejo.com.btcgraph.di.fragment.FragmentInjector
 import artalejo.com.data.di.DataModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
