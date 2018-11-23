@@ -29,15 +29,26 @@ dependencies {
     def globalConfiguration = rootProject.extensions.getByName("ext")
     def supportVersion = globalConfiguration['support_version']
     def daggerVersion = globalConfiguration['dagger_version']
+    def rxJavaVersion = globalConfiguration['rx_java_version']
+    def rxAndroidVersion = globalConfiguration['rx_android_version']
+    def rxKotlinVersion = globalConfiguration['rx_kotlin_version']
 
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportVersion"
+
+    // view model and live data
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     // dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
