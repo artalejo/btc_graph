@@ -28,7 +28,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ViewStub
-        android:id="@+id/error_viewstub"
+        android:id="@+id/error_view_stub"
+        android:inflatedId="@+id/error_stub_id"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout="@layout/error_view_stub"

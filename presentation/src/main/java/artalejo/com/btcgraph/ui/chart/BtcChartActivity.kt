@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewStub
 import artalejo.com.btc_graph.R
 import artalejo.com.btcgraph.ui.base.BaseActivity
 import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_btc_chart.*
 import javax.inject.Inject
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-
+import kotlinx.android.synthetic.main.error_view_stub.*
 
 
 class BtcChartActivity: BaseActivity() {
@@ -28,7 +29,11 @@ class BtcChartActivity: BaseActivity() {
 
     override fun onViewLoaded(savedInstanceState: Bundle?) {
         setUpViewModelStateObserver()
-        // TODO sartalejo: pass the parameters properly
+        fetchBtcChartData()
+    }
+
+    private fun fetchBtcChartData() {
+        // TODO sartalejo: fetch the actual timestamp from the layout value
         btcChartViewModel.loadBtcChartData("1weeks")
     }
 
@@ -46,12 +51,12 @@ class BtcChartActivity: BaseActivity() {
                     } ?: run { ErrorState(getString(R.string.retrieve_data_error)) }
                 }
                 is LoadingState -> {
+                    hideErrorView()
                     btc_chart.setGone()
                     btc_data_progress_bar.setVisible()
                 }
                 is ErrorState -> {
-                    // TODO check the viewstub
-                    error_viewstub.setVisible()
+                    setUpErrorViewStub()
                     btc_chart.setVisible()
                     btc_data_progress_bar.setGone()
                 }
@@ -65,6 +70,18 @@ class BtcChartActivity: BaseActivity() {
         val btcDataSet = LineDataSet(entries, btcData.description)
         btc_chart.data = LineData(btcDataSet)
         btc_chart.invalidate()
+    }
+
+    private fun setUpErrorViewStub() {
+        error_view_stub?.let { it.inflate() } ?: run {
+            findViewById<ViewStub>(R.id.error_stub_id).setVisible()
+        }
+        error_try_again?.setOnClickListener { fetchBtcChartData() }
+    }
+
+    private fun hideErrorView() {
+        // The view stub is null when it has already been inflated
+        if (error_view_stub == null)  findViewById<ViewStub>(R.id.error_stub_id).setGone()
     }
     override fun onDestroy() {
         super.onDestroy()

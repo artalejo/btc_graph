@@ -14,12 +14,12 @@ fun View.setVisible() {
  */
 
 fun View.setInvisible() {
-    this.visibility = View.INVISIBLE
+    if (this.visibility == View.VISIBLE) this.visibility = View.INVISIBLE
 }
 
 /**
  * Sets a view visibility to [View.GONE]
  */
 fun View.setGone() {
-    this.visibility = View.GONE
+    if (this.visibility == View.VISIBLE) this.visibility = View.GONE
 }
