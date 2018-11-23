@@ -1,4 +1,4 @@
-package artalejo.com.data.di
+package artalejo.com.btcgraph.di.application
 
 import artalejo.com.data.network.BASE_URL
 import artalejo.com.data.network.services.BtcChartService

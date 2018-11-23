@@ -4,7 +4,6 @@ import android.app.Application
 import artalejo.com.btcgraph.BaseApplication
 import artalejo.com.btcgraph.di.activity.ActivityInjector
 import artalejo.com.btcgraph.di.fragment.FragmentInjector
-import artalejo.com.data.di.DataModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

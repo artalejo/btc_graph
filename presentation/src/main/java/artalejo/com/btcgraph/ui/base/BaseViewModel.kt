@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import artalejo.com.btcgraph.di.viewmodel.DaggerViewModelInjector
 import artalejo.com.btcgraph.di.viewmodel.ViewModelInjector
 import artalejo.com.btcgraph.ui.chart.BtcChartViewModel
-import artalejo.com.data.di.DataModule
+import artalejo.com.btcgraph.di.application.DataModule
 
 abstract class BaseViewModel: ViewModel(){
 

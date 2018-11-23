@@ -1,7 +1,6 @@
 package artalejo.com.btcgraph.ui.chart
 
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import artalejo.com.btcgraph.ui.base.BaseViewModel
 import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
 import artalejo.com.btcgraph.ui.entities.toBtcChartViewEntity
@@ -16,32 +15,25 @@ class BtcChartViewModel @Inject constructor(private val fetchBtcChartDataInterac
     private lateinit var subscription: Disposable
     val btcLiveData =  MutableLiveData<BtcChartModel>()
 
-    init {
-        btcLiveData.value = LoadingState()
-    }
-
-    fun loadBtcChartData(timeStamp: String, rollingAverage: String){
-        subscription = fetchBtcChartDataInteractor.fetchBtcChartData(timeStamp, rollingAverage)
+    fun loadBtcChartData(timeStamp: String){
+        subscription = fetchBtcChartDataInteractor.fetchBtcChartData(timeStamp)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchBtcDataStarted() }
-                .doOnSuccess { onFetchBtcDataSuccess(it.toBtcChartViewEntity()) }
-                .doOnError { onFetchBtcDataError() }
-                .subscribe()
+                .map { it.toBtcChartViewEntity() }
+                .subscribe(this::onFetchBtcDataSuccess, this::onFetchBtcDataError)
     }
 
 
-    private fun onFetchBtcDataStarted(){
+    private fun onFetchBtcDataStarted() { btcLiveData.value = LoadingState() }
 
+    private fun onFetchBtcDataSuccess(btcData: BtcChartViewEntity) {
+        btcLiveData.value = DataRetrievedState(btcData)
     }
 
-    private fun onFetchBtcDataSuccess(btcData: BtcChartViewEntity){
-        Log.wtf("HOLA", btcData.status)
-    }
-
-    private fun onFetchBtcDataError(){
+    private fun onFetchBtcDataError(error: Throwable){
         // TODO sartalejo: get a proper error message
-        btcLiveData.value = ErrorState("errorMessage")
+        btcLiveData.value = ErrorState(error.message ?: "error Message")
     }
 
     override fun onCleared() {

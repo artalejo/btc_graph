@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="artalejo.com.btc_graph">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="artalejo.com.btcgraph.BaseApplication"
         android:icon="@mipmap/ic_launcher"

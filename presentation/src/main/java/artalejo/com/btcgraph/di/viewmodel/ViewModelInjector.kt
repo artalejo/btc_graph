@@ -1,7 +1,7 @@
 package artalejo.com.btcgraph.di.viewmodel
 
 import artalejo.com.btcgraph.ui.chart.BtcChartViewModel
-import artalejo.com.data.di.DataModule
+import artalejo.com.btcgraph.di.application.DataModule
 import dagger.Component
 import javax.inject.Singleton
 

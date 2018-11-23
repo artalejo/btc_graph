@@ -6,7 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import artalejo.com.btc_graph.R
 import artalejo.com.btcgraph.ui.base.BaseActivity
+import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
+import artalejo.com.btcgraph.ui.extensions.setGone
+import artalejo.com.btcgraph.ui.extensions.setVisible
+import com.github.mikephil.charting.data.Entry
+import kotlinx.android.synthetic.main.activity_btc_chart.*
 import javax.inject.Inject
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+
+
 
 class BtcChartActivity: BaseActivity() {
 
@@ -20,7 +29,7 @@ class BtcChartActivity: BaseActivity() {
     override fun onViewLoaded(savedInstanceState: Bundle?) {
         setUpViewModelStateObserver()
         // TODO sartalejo: pass the parameters properly
-        btcChartViewModel.loadBtcChartData("", "")
+        btcChartViewModel.loadBtcChartData("1weeks")
     }
 
     private fun setUpViewModelStateObserver()=
@@ -30,18 +39,33 @@ class BtcChartActivity: BaseActivity() {
         state?.let {
             when (state) {
                 is DataRetrievedState -> {
-//
+                    it.data?.let {
+                        btcData -> populateBtcDataChart(btcData)
+                        btc_chart.setVisible()
+                        btc_data_progress_bar.setGone()
+                    } ?: run { ErrorState(getString(R.string.retrieve_data_error)) }
                 }
                 is LoadingState -> {
-//
+                    btc_chart.setGone()
+                    btc_data_progress_bar.setVisible()
                 }
                 is ErrorState -> {
-//
+                    // TODO check the viewstub
+                    error_viewstub.setVisible()
+                    btc_chart.setVisible()
+                    btc_data_progress_bar.setGone()
                 }
             }
         }
     }
 
+    private fun populateBtcDataChart(btcData: BtcChartViewEntity) {
+        val entries = arrayListOf<Entry>()
+        btcData.values.forEach { entries.add(Entry(it.x.toFloat(), it.y.toFloat())) }
+        val btcDataSet = LineDataSet(entries, btcData.description)
+        btc_chart.data = LineData(btcDataSet)
+        btc_chart.invalidate()
+    }
     override fun onDestroy() {
         super.onDestroy()
         btcChartViewModel.btcLiveData.removeObserver(stateObserver)
