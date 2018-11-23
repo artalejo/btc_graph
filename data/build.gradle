@@ -36,9 +36,9 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$supportVersion"
 
     // retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     // rx
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"

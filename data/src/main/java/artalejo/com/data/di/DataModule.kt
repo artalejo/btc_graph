@@ -35,10 +35,10 @@ class DataModule {
         return btcChartApiRepository
     }
 
-//    @Provides
-//    @Singleton
-//    fun providesBtcChartService(retrofit: Retrofit): BtcChartService {
-//        return retrofit.create(BtcChartService::class.java)
-//    }
+    @Provides
+    @Singleton
+    fun providesBtcChartService(retrofit: Retrofit): BtcChartService {
+        return retrofit.create(BtcChartService::class.java)
+    }
 
 }

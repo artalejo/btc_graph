@@ -1,6 +1,7 @@
 package artalejo.com.btcgraph.ui.chart
 
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import artalejo.com.btcgraph.ui.base.BaseViewModel
 import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
 import artalejo.com.btcgraph.ui.entities.toBtcChartViewEntity
@@ -13,23 +14,20 @@ import javax.inject.Inject
 class BtcChartViewModel @Inject constructor(private val fetchBtcChartDataInteractor: FetchBtcChartDataInteractor): BaseViewModel() {
 
     private lateinit var subscription: Disposable
-    val stateLiveData =  MutableLiveData<BtcChartViewEntity>()
+    val btcLiveData =  MutableLiveData<BtcChartModel>()
 
     init {
-//        stateLiveData.value = LoadingState(BtcChartViewEntity())
-        loadBtcChartData()
+        btcLiveData.value = LoadingState()
     }
 
-    private fun loadBtcChartData(){
-        // TODO set the params properly for the call
-        subscription = fetchBtcChartDataInteractor.fetchBtcChartData("", "")
+    fun loadBtcChartData(timeStamp: String, rollingAverage: String){
+        subscription = fetchBtcChartDataInteractor.fetchBtcChartData(timeStamp, rollingAverage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchBtcDataStarted() }
-                .subscribe(
-                        { onFetchBtcDataSuccess(it.toBtcChartViewEntity()) },
-                        { onFetchBtcDataError() }
-                )
+                .doOnSuccess { onFetchBtcDataSuccess(it.toBtcChartViewEntity()) }
+                .doOnError { onFetchBtcDataError() }
+                .subscribe()
     }
 
 
@@ -38,11 +36,12 @@ class BtcChartViewModel @Inject constructor(private val fetchBtcChartDataInterac
     }
 
     private fun onFetchBtcDataSuccess(btcData: BtcChartViewEntity){
-
+        Log.wtf("HOLA", btcData.status)
     }
 
     private fun onFetchBtcDataError(){
-
+        // TODO sartalejo: get a proper error message
+        btcLiveData.value = ErrorState("errorMessage")
     }
 
     override fun onCleared() {

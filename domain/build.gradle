@@ -11,6 +11,13 @@ dependencies {
     def rxJavaVersion = globalConfiguration['rx_java_version']
     def rxAndroidVersion = globalConfiguration['rx_android_version']
     def rxKotlinVersion = globalConfiguration['rx_kotlin_version']
+    def daggerVersion = globalConfiguration['dagger_version']
+
+    // dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     // rx
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
