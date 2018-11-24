@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/timestamp_widget_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_week_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/timestamp_two_weeks_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:selected="false"
+        app:title="@string/timestamp_week_title"
+        app:value="@string/timestamp_week_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_two_weeks_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/timestamp_month_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timestamp_week_btn"
+        app:layout_constraintTop_toTopOf="@+id/timestamp_week_btn"
+        app:selected="false"
+        app:title="@string/timestamp_two_weeks_title"
+        app:value="@string/timestamp_two_weeks_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_month_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/timestamp_two_months_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timestamp_two_weeks_btn"
+        app:layout_constraintTop_toTopOf="@+id/timestamp_two_weeks_btn"
+        app:selected="false"
+        app:title="@string/timestamp_month_title"
+        app:value="@string/timestamp_month_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_two_months_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/timestamp_month_btn"
+        app:layout_constraintTop_toTopOf="@+id/timestamp_month_btn"
+        app:selected="false"
+        app:title="@string/timestamp_two_months_title"
+        app:value="@string/timestamp_two_months_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_six_months_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/timestamp_week_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/timestamp_week_btn"
+        app:layout_constraintTop_toBottomOf="@+id/timestamp_week_btn"
+        app:selected="false"
+        app:title="@string/timestamp_six_months_title"
+        app:value="@string/timestamp_six_months_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_year_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/timestamp_two_weeks_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/timestamp_two_weeks_btn"
+        app:layout_constraintTop_toTopOf="@+id/timestamp_six_months_btn"
+        app:selected="true"
+        app:title="@string/timestamp_year_title"
+        app:value="@string/timestamp_year_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_two_years_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="@+id/timestamp_month_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/timestamp_month_btn"
+        app:layout_constraintTop_toTopOf="@+id/timestamp_year_btn"
+        app:selected="false"
+        app:title="@string/timestamp_two_years_title"
+        app:value="@string/timestamp_two_years_value" />
+
+    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+        android:id="@+id/timestamp_all_time_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/timestamp_two_months_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/timestamp_two_months_btn"
+        app:layout_constraintTop_toTopOf="@+id/timestamp_two_years_btn"
+        app:selected="false"
+        app:title="@string/timestamp_all_title"
+        app:value="@string/timestamp_all_time_value" />
+
+</android.support.constraint.ConstraintLayout>

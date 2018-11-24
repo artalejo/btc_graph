@@ -3,4 +3,23 @@
     <string name="something_wrong_message">Something when wrong</string>
     <string name="try_again_question">Try again</string>
     <string name="retrieve_data_error">There has been an error retrieving your data</string>
+
+    <!-- Timestamp widget title and values -->
+    <string name="timestamp_week_title">1 Week</string>
+    <string name="timestamp_two_weeks_title">2 Weeks</string>
+    <string name="timestamp_month_title">30 days</string>
+    <string name="timestamp_two_months_title">60 days</string>
+    <string name="timestamp_six_months_title">180 days</string>
+    <string name="timestamp_year_title">1 Year</string>
+    <string name="timestamp_two_years_title">2 Years</string>
+    <string name="timestamp_all_title">All time</string>
+
+    <string name="timestamp_week_value">1week</string>
+    <string name="timestamp_two_weeks_value">2weeks</string>
+    <string name="timestamp_month_value">30days</string>
+    <string name="timestamp_two_months_value">60days</string>
+    <string name="timestamp_six_months_value">180days</string>
+    <string name="timestamp_year_value">1year</string>
+    <string name="timestamp_two_years_value">2years</string>
+    <string name="timestamp_all_time_value">all</string>
 </resources>

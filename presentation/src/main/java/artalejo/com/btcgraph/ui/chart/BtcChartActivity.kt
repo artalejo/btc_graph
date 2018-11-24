@@ -7,18 +7,19 @@ import android.os.Bundle
 import android.view.ViewStub
 import artalejo.com.btc_graph.R
 import artalejo.com.btcgraph.ui.base.BaseActivity
+import artalejo.com.btcgraph.ui.custom.ChartTimestampWidget
 import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
 import artalejo.com.btcgraph.ui.extensions.setGone
 import artalejo.com.btcgraph.ui.extensions.setVisible
 import com.github.mikephil.charting.data.Entry
-import kotlinx.android.synthetic.main.activity_btc_chart.*
-import javax.inject.Inject
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import kotlinx.android.synthetic.main.activity_btc_chart.*
 import kotlinx.android.synthetic.main.error_view_stub.*
+import javax.inject.Inject
 
 
-class BtcChartActivity: BaseActivity() {
+class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampChangedListener {
 
     companion object {
         @JvmStatic fun getIntent(context: Context) = Intent(context, BtcChartActivity::class.java)
@@ -27,15 +28,23 @@ class BtcChartActivity: BaseActivity() {
     @Inject lateinit var btcChartViewModel: BtcChartViewModel
     override var layout = R.layout.activity_btc_chart
 
+    private lateinit var timestampSelected : String
+
     override fun onViewLoaded(savedInstanceState: Bundle?) {
         setUpViewModelStateObserver()
-        fetchBtcChartData()
+        setUpChartTimestampWidget()
+        fetchBtcChartData(timestampSelected)
     }
 
-    private fun fetchBtcChartData() {
-        // TODO sartalejo: fetch the actual timestamp from the layout value
-        btcChartViewModel.loadBtcChartData("1weeks")
+    private fun setUpChartTimestampWidget() {
+        this.timestampSelected = getString(R.string.timestamp_year_value)
+        timestamp_widget.setListener(this)
     }
+
+    private fun fetchBtcChartData(timestamp: String) {
+        btcChartViewModel.loadBtcChartData(timestamp)
+    }
+
 
     private fun setUpViewModelStateObserver()=
             btcChartViewModel.btcLiveData.observe(this, stateObserver)
@@ -72,17 +81,23 @@ class BtcChartActivity: BaseActivity() {
         btc_chart.invalidate()
     }
 
+    override fun onTimestampChanged(timestamp: String) {
+        this.timestampSelected = timestamp
+        fetchBtcChartData(timestamp)
+    }
+
     private fun setUpErrorViewStub() {
         error_view_stub?.let { it.inflate() } ?: run {
             findViewById<ViewStub>(R.id.error_stub_id).setVisible()
         }
-        error_try_again?.setOnClickListener { fetchBtcChartData() }
+        error_try_again?.setOnClickListener { fetchBtcChartData(timestampSelected) }
     }
 
     private fun hideErrorView() {
         // The view stub is null when it has already been inflated
         if (error_view_stub == null)  findViewById<ViewStub>(R.id.error_stub_id).setGone()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         btcChartViewModel.btcLiveData.removeObserver(stateObserver)
