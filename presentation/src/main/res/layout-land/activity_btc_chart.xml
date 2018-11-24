@@ -12,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/timestamp_widget_margin_top"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="@dimen/timestamp_widget_margin_top"
+        android:layout_marginRight="@dimen/timestamp_widget_margin_top"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,8 +25,8 @@
         android:layout_margin="@dimen/btc_chart_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timestamp_widget" />
+        app:layout_constraintStart_toEndOf="@+id/timestamp_widget"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/btc_data_progress_bar"
@@ -32,8 +34,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/btc_chart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btc_chart"
+        app:layout_constraintStart_toStartOf="@+id/btc_chart"
         app:layout_constraintTop_toTopOf="@+id/btc_chart"
         tools:visibility="visible" />
 

@@ -18,10 +18,10 @@ import kotlinx.android.synthetic.main.activity_btc_chart.*
 import kotlinx.android.synthetic.main.error_view_stub.*
 import javax.inject.Inject
 
-
 class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampChangedListener {
 
     companion object {
+        private const val CHART_ANIM_DURATION = 800
         @JvmStatic fun getIntent(context: Context) = Intent(context, BtcChartActivity::class.java)
     }
 
@@ -44,7 +44,6 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
     private fun fetchBtcChartData(timestamp: String) {
         btcChartViewModel.loadBtcChartData(timestamp)
     }
-
 
     private fun setUpViewModelStateObserver()=
             btcChartViewModel.btcLiveData.observe(this, stateObserver)
@@ -76,9 +75,25 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
     private fun populateBtcDataChart(btcData: BtcChartViewEntity) {
         val entries = arrayListOf<Entry>()
         btcData.values.forEach { entries.add(Entry(it.x.toFloat(), it.y.toFloat())) }
-        val btcDataSet = LineDataSet(entries, btcData.description)
-        btc_chart.data = LineData(btcDataSet)
+        configureBtcChart(entries, btcData.description)
         btc_chart.invalidate()
+    }
+
+    private fun configureBtcChart(entries : ArrayList<Entry>, description: String) {
+        val btcDataSet = LineDataSet(entries, description)
+        btcDataSet.setDrawCircles(false)
+        btcDataSet.setDrawFilled(true)
+        val lineData = LineData(btcDataSet)
+        lineData.setDrawValues(false)
+        btc_chart.data = lineData
+        btc_chart.xAxis.isEnabled = false
+        btc_chart.axisRight.isEnabled = false
+        btc_chart.setBorderColor(R.color.colorAccent)
+        btc_chart.description.isEnabled = false
+        btc_chart.setScaleEnabled(false)
+        btc_chart.setDrawGridBackground(false)
+        btc_chart.isDragEnabled = false
+        btc_chart.animateX(CHART_ANIM_DURATION)
     }
 
     override fun onTimestampChanged(timestamp: String) {

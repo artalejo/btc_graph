@@ -4,5 +4,8 @@
     <dimen name="error_title_size">20sp</dimen>
     <dimen name="custom_timestamp_btn_padding">8dp</dimen>
     <dimen name="custom_chart_timestamp_button_width">75dp</dimen>
-    <dimen name="custom_chart_timestamp_button_margin">4dp</dimen>
+    <dimen name="custom_chart_timestamp_margin_top">4dp</dimen>
+    <dimen name="custom_chart_timestamp_margin">4dp</dimen>
+    <dimen name="btc_chart_margin">16dp</dimen>
+    <dimen name="timestamp_widget_margin_top">16dp</dimen>
 </resources>

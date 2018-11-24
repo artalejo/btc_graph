@@ -6,8 +6,7 @@
     android:id="@+id/chart_time_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_time_button_border"
-    android:layout_margin="8dp">
+    android:foreground="@drawable/custom_time_button_border">
 
     <TextView
         android:id="@+id/timestamp"
