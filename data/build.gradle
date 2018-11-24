@@ -1,12 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+ext {
+    retrofit_version = '2.5.0'
+}
+
 android {
-    compileSdkVersion 28
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
         versionCode 1
         versionName "1.0"
 
@@ -25,37 +30,30 @@ dependencies {
     implementation project(":domain")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    def globalConfiguration = rootProject.extensions.getByName("ext")
-    def retrofitVersion = globalConfiguration['retrofit_version']
-    def supportVersion = globalConfiguration['support_version']
-    def rxJavaVersion = globalConfiguration['rx_java_version']
-    def rxAndroidVersion = globalConfiguration['rx_android_version']
-    def rxKotlinVersion = globalConfiguration['rx_kotlin_version']
-    def daggerVersion = globalConfiguration['dagger_version']
-
-    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation libs.kotlinJdk
+    implementation libs.appCompat
 
     // retrofit
-    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    api "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-
-    // rx
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
     // dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation libs.dagger
+    implementation libs.daggerAndroid
+    kapt libs.daggerCompiler
+    kapt libs.daggerProcessor
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // rx
+    implementation libs.rxJava
+    implementation libs.rxAndroid
+    implementation libs.rxKotlin
+
+    testImplementation libs.junit
+    androidTestImplementation libs.testRunner
+    androidTestImplementation libs.espressoCore
 }
+
 repositories {
     mavenCentral()
 }

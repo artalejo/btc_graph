@@ -3,12 +3,20 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
+ext {
+    lifecycle_version = '1.1.1'
+    graph_lib_version = 'v3.1.0-alpha'
+    constraint_version = "1.1.3"
+}
+
 android {
-    compileSdkVersion 28
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+
     defaultConfig {
         applicationId "artalejo.com.btcgraph"
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -30,39 +38,30 @@ dependencies {
     implementation project(":data")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    def globalConfiguration = rootProject.extensions.getByName("ext")
-    def supportVersion = globalConfiguration['support_version']
-    def daggerVersion = globalConfiguration['dagger_version']
-    def rxJavaVersion = globalConfiguration['rx_java_version']
-    def rxAndroidVersion = globalConfiguration['rx_android_version']
-    def rxKotlinVersion = globalConfiguration['rx_kotlin_version']
-    def constraintVersion = globalConfiguration['constraint_version']
-    def graphLibVersion = globalConfiguration['graph_lib_version']
-
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation libs.kotlinJdk
+    implementation libs.appCompat
 
     // constraint layout
-    implementation "com.android.support.constraint:constraint-layout:$constraintVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_version"
 
     // graphs lib
-    implementation "com.github.PhilJay:MPAndroidChart:$graphLibVersion"
+    implementation "com.github.PhilJay:MPAndroidChart:$graph_lib_version"
 
     // view model and live data
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     // dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation libs.dagger
+    implementation libs.daggerAndroid
+    kapt libs.daggerCompiler
+    kapt libs.daggerProcessor
 
     // rx
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation libs.rxJava
+    implementation libs.rxAndroid
+    implementation libs.rxKotlin
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation libs.junit
+    androidTestImplementation libs.testRunner
+    androidTestImplementation libs.espressoCore
 }

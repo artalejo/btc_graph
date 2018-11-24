@@ -5,25 +5,18 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-
-    def globalConfiguration = rootProject.extensions.getByName("ext")
-    def rxJavaVersion = globalConfiguration['rx_java_version']
-    def rxAndroidVersion = globalConfiguration['rx_android_version']
-    def rxKotlinVersion = globalConfiguration['rx_kotlin_version']
-    def daggerVersion = globalConfiguration['dagger_version']
+    implementation libs.kotlinJdk
 
     // dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation libs.dagger
+    implementation libs.daggerAndroid
+    kapt libs.daggerCompiler
+    kapt libs.daggerProcessor
 
     // rx
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
-
+    implementation libs.rxJava
+    implementation libs.rxAndroid
+    implementation libs.rxKotlin
 }
 
 sourceCompatibility = "7"
