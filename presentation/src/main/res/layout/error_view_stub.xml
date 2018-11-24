@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/something_wrong_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/windowBackgroundColor"
     android:orientation="vertical">
 
     <ImageView
@@ -13,52 +12,56 @@
         android:layout_width="@dimen/error_image_size"
         android:layout_height="@dimen/error_image_size"
         android:src="@drawable/ic_error"
+        app:layout_constraintBottom_toTopOf="@+id/error_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/top_horizontal_guideline" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
 
     <TextView
         android:id="@+id/error_title"
-        android:layout_width="384dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="@string/something_wrong_message"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/error_title_size"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/error_try_again"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_image" />
+        app:layout_constraintTop_toBottomOf="@+id/error_image"
+        app:layout_constraintVertical_bias="0.15" />
 
     <Button
         android:id="@+id/error_try_again"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:gravity="center"
-        android:padding="10dp"
+        android:padding="@dimen/error_try_again_padding"
         android:text="@string/try_again_question"
-        android:textColor="@color/colorAccentDark"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/error_try_again_text_size"
         android:textStyle="bold"
-        android:background="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_horizontal_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/error_title" />
+        app:layout_constraintTop_toBottomOf="@+id/error_title"
+        app:layout_constraintVertical_bias="0.25" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/top_horizontal_guideline"
+        android:id="@+id/half_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/bottom_horizontal_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.5" />
 
 </android.support.constraint.ConstraintLayout>
