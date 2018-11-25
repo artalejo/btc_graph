@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ChartTimestampButton">
+    <declare-styleable name="ChartTimespanButton">
         <attr name="title" format="string"/>
         <attr name="value" format="string"/>
         <attr name="selected" format="boolean"/>

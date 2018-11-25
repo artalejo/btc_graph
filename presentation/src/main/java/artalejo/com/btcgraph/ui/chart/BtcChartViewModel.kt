@@ -42,5 +42,4 @@ class BtcChartViewModel @Inject constructor(private val fetchBtcChartDataInterac
         super.onCleared()
         subscription.dispose()
     }
-
 }

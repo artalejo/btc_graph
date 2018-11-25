@@ -1,8 +1,8 @@
-package artalejo.com.btc_graph.conditionWatcher.instructions
+package artalejo.com.btcgraph.conditionWatcher.instructions
 
 import android.support.v7.app.AppCompatActivity
-import artalejo.com.btc_graph.R
-import artalejo.com.btc_graph.conditionWatcher.Instruction
+import artalejo.com.btcgraph.R
+import artalejo.com.btcgraph.conditionWatcher.Instruction
 import com.github.mikephil.charting.charts.LineChart
 
 class FetchBtcChartDataInstruction(private val timestampSelected: String) : Instruction() {

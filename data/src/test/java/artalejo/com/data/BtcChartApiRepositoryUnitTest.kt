@@ -18,6 +18,7 @@ class BtcChartApiRepositoryUnitTest {
     private lateinit var mockedApiService: BtcChartService
     private val btcChartApiRepository by lazy { BtcChartApiRepository(mockedApiService) }
     private val timestamp = "timestamp"
+    private val btcDataEntity = BtcDataEntity("status_ok", "name", "USD", "1week", "test description", listOf())
 
     @Before
     fun setUp(){
@@ -32,14 +33,12 @@ class BtcChartApiRepositoryUnitTest {
 
     @Test
     fun onFetchBtcPriceDataEmptyDataInfoSuccess() {
-        val btcDataEntity = BtcDataEntity()
         whenever(mockedApiService.getBtcChartData(timestamp)).thenReturn(Single.just(btcDataEntity))
         btcChartApiRepository.fetchBtcChartData(timestamp).test().assertComplete()
     }
 
     @Test
     fun onFetchBtcPriceDataSuccess() {
-        val btcDataEntity = BtcDataEntity("status_ok", "name", "USD", "1week", "test description", listOf())
         whenever(mockedApiService.getBtcChartData(timestamp)).thenReturn(Single.just(btcDataEntity))
         btcChartApiRepository.fetchBtcChartData(timestamp).test().assertValue(btcDataEntity.toBtcDataInfo())
     }

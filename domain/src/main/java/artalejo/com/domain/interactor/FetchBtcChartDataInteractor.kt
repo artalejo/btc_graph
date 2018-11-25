@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class FetchBtcChartDataInteractor @Inject constructor(private val btcChartRepository: BtcChartRepository) {
 
-    fun fetchBtcChartData(timestamp: String): Single<BtcDataInfo> {
-        return btcChartRepository.fetchBtcChartData(timestamp)
+    fun fetchBtcChartData(timespan: String): Single<BtcDataInfo> {
+        return btcChartRepository.fetchBtcChartData(timespan)
     }
 }

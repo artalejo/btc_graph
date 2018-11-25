@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_week_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:title="@string/timestamp_week_title"
         app:value="@string/timestamp_week_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_two_weeks_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:title="@string/timestamp_two_weeks_title"
         app:value="@string/timestamp_two_weeks_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_month_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         app:title="@string/timestamp_month_title"
         app:value="@string/timestamp_month_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_two_months_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         app:title="@string/timestamp_two_months_title"
         app:value="@string/timestamp_two_months_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_six_months_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         app:title="@string/timestamp_six_months_title"
         app:value="@string/timestamp_six_months_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_year_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         app:title="@string/timestamp_year_title"
         app:value="@string/timestamp_year_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_two_years_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
         app:title="@string/timestamp_two_years_title"
         app:value="@string/timestamp_two_years_value" />
 
-    <artalejo.com.btcgraph.ui.custom.ChartTimestampButton
+    <artalejo.com.btcgraph.ui.custom.ChartTimespanButton
         android:id="@+id/timestamp_all_time_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,0 +1,14 @@
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@color/colorPrimary" />
+
+    <item
+        android:width="@dimen/splash_background_icon_size"
+        android:height="@dimen/splash_background_icon_size"
+        android:drawable="@drawable/ic_bitcoin"
+        android:gravity="center"
+        android:top="120dp" android:bottom="120dp"
+        android:right="40dp" android:left="40dp"/>
+
+</layer-list>

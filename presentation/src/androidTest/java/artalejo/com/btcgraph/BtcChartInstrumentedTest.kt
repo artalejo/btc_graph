@@ -1,4 +1,4 @@
-package artalejo.com.btc_graph
+package artalejo.com.btcgraph
 
 import android.content.pm.ActivityInfo
 import android.support.test.espresso.Espresso
@@ -9,8 +9,8 @@ import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import artalejo.com.btc_graph.conditionWatcher.ConditionWatcher
-import artalejo.com.btc_graph.conditionWatcher.instructions.FetchBtcChartDataInstruction
+import artalejo.com.btcgraph.conditionWatcher.ConditionWatcher
+import artalejo.com.btcgraph.conditionWatcher.instructions.FetchBtcChartDataInstruction
 import artalejo.com.btcgraph.ui.chart.BtcChartActivity
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.containsString

@@ -1,4 +1,4 @@
-package artalejo.com.btc_graph.conditionWatcher
+package artalejo.com.btcgraph.conditionWatcher
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity
 
 abstract class Instruction {
 
-    var dataContainer = Bundle()
-        private set
+    private var dataContainer = Bundle()
 
     abstract val description: String
 

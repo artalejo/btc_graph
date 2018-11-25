@@ -1,4 +1,4 @@
-package artalejo.com.btc_graph.conditionWatcher
+package artalejo.com.btcgraph.conditionWatcher
 
 import android.support.v7.app.AppCompatActivity
 
@@ -47,14 +47,6 @@ class ConditionWatcher private constructor() {
 
             if (status == TIMEOUT)
                 throw Exception(instruction.description + " - took more than " + instance.timeoutLimit / 1000 + " seconds. Test stopped.")
-        }
-
-        fun setWatchInterval(watchInterval: Int) {
-            instance.watchInterval = watchInterval
-        }
-
-        fun setTimeoutLimit(ms: Int) {
-            instance.timeoutLimit = ms
         }
     }
 }

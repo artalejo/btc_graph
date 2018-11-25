@@ -1,7 +1,7 @@
 package artalejo.com.btcgraph.di.viewmodel
 
-import artalejo.com.btcgraph.ui.chart.BtcChartViewModel
 import artalejo.com.btcgraph.di.application.DataModule
+import artalejo.com.btcgraph.ui.chart.BtcChartViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,7 +11,6 @@ import javax.inject.Singleton
 interface ViewModelInjector {
 
     fun inject(btcChartViewModel: BtcChartViewModel)
-//    fun inject(otherViewModel: OtherViewModel)
 
     @Component.Builder
     interface Builder {

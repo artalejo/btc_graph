@@ -10,10 +10,9 @@
     <dimen name="timestamp_widget_margin_top">16dp</dimen>
 
     <!-- error view stub-->
-    <item name="error_view_top_guideline" format="float" type="dimen">0.2</item>
-    <item name="error_view_bottom_guideline" format="float" type="dimen">0.8</item>
     <dimen name="error_image_size">150dp</dimen>
     <dimen name="error_title_size">20sp</dimen>
     <dimen name="error_try_again_padding">16dp</dimen>
     <dimen name="error_try_again_text_size">16sp</dimen>
+    <dimen name="splash_background_icon_size">80dp</dimen>
 </resources>

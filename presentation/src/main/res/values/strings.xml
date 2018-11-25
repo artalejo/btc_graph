@@ -22,4 +22,5 @@
     <string name="timestamp_year_value">1year</string>
     <string name="timestamp_two_years_value">2years</string>
     <string name="timestamp_all_time_value">all</string>
+    <string name="content_description">content_description</string>
 </resources>

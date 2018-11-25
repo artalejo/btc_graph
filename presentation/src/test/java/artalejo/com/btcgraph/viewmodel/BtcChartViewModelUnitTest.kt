@@ -1,4 +1,4 @@
-package artalejo.com.btc_graph.viewmodel
+package artalejo.com.btcgraph.viewmodel
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
@@ -48,7 +48,7 @@ class BtcChartViewModelUnitTest {
     @Test
     fun loadBtcChartDataSuccess() {
         //given
-        val btcDataInfo = BtcDataInfo()
+        val btcDataInfo = BtcDataInfo("test description", listOf())
         whenever(mockedFetchBtcDataInteractor.fetchBtcChartData(timestamp)).thenReturn(Single.just(btcDataInfo))
         //when
         btcViewModel.loadBtcChartData(timestamp)

@@ -4,10 +4,10 @@ import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import artalejo.com.btc_graph.R
+import artalejo.com.btcgraph.R
 import kotlinx.android.synthetic.main.custom_timestamp_widget.view.*
 
-class ChartTimestampWidget : ConstraintLayout, ChartTimestampButton.OnTimeStampClickedListener {
+class ChartTimespanWidget : ConstraintLayout, ChartTimespanButton.OnTimeSpanClickedListener {
 
     interface OnChartTimeStampChangedListener {
         fun onTimestampChanged(timestamp: String)
@@ -50,18 +50,18 @@ class ChartTimestampWidget : ConstraintLayout, ChartTimestampButton.OnTimeStampC
         this.listener = onChartTimeStampChangedListener
     }
 
-    override fun onTimeStampClicked(viewClickedId: Int, timestamp: String) {
+    override fun onTimeSpanClicked(viewClickedId: Int, timespan: String) {
         deselectPreviousSelectedButton()
         this.currentIdSelected = viewClickedId
-        this.listener?.onTimestampChanged(timestamp)
+        this.listener?.onTimestampChanged(timespan)
     }
 
     private fun deselectPreviousSelectedButton() {
-        findViewById<ChartTimestampButton>(this.currentIdSelected).setDeselectedMode()
+        findViewById<ChartTimespanButton>(this.currentIdSelected).setDeselectedMode()
     }
 
     fun selectSelectedButton(selectedId: Int) {
         this.currentIdSelected = selectedId
-        findViewById<ChartTimestampButton>(selectedId).setSelectedMode()
+        findViewById<ChartTimespanButton>(selectedId).setSelectedMode()
     }
 }

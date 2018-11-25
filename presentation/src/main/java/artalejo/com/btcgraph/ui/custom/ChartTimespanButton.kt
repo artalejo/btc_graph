@@ -6,13 +6,13 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import artalejo.com.btc_graph.R
+import artalejo.com.btcgraph.R
 import kotlinx.android.synthetic.main.custom_chart_timestamp_button.view.*
 
-class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
+class ChartTimespanButton : ConstraintLayout, View.OnClickListener{
 
-    interface OnTimeStampClickedListener {
-        fun onTimeStampClicked(viewClickedId: Int, timestamp: String)
+    interface OnTimeSpanClickedListener {
+        fun onTimeSpanClicked(viewClickedId: Int, timespan: String)
     }
 
     private var attrs: AttributeSet? = null
@@ -20,7 +20,7 @@ class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
     private val defaultTitle = context.getString(R.string.timestamp_year_title)
     private val defaultValue = context.getString(R.string.timestamp_year_value)
     private lateinit var title: String
-    private var listener : OnTimeStampClickedListener? = null
+    private var listener : OnTimeSpanClickedListener? = null
     private var isBtnSelected: Boolean = false
     lateinit var value: String
 
@@ -45,17 +45,18 @@ class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
                 .inflate(R.layout.custom_chart_timestamp_button, this, true)
 
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChartTimestampButton, defStyleAttr, 0)
-            title = typedArray.getString(R.styleable.ChartTimestampButton_title) ?: defaultTitle
-            value = typedArray.getString(R.styleable.ChartTimestampButton_value) ?: defaultValue
-            isBtnSelected = typedArray.getBoolean(R.styleable.ChartTimestampButton_selected, false)
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChartTimespanButton, defStyleAttr, 0)
+            title = typedArray.getString(R.styleable.ChartTimespanButton_title) ?: defaultTitle
+            value = typedArray.getString(R.styleable.ChartTimespanButton_value) ?: defaultValue
+            isBtnSelected = typedArray.getBoolean(R.styleable.ChartTimespanButton_selected, false)
             setupInitialValues()
+            typedArray.recycle()
         }
         setOnClickListener(this)
     }
 
-    fun setListener(onTimeStampClickedListener: OnTimeStampClickedListener) {
-        this.listener = onTimeStampClickedListener
+    fun setListener(onTimeSpanClickedListener: OnTimeSpanClickedListener) {
+        this.listener = onTimeSpanClickedListener
     }
 
     private fun setupInitialValues() {
@@ -78,7 +79,7 @@ class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
     override fun onClick(v: View?) {
         if (!isBtnSelected) {
             setSelectedMode()
-            v?.let { view ->  this.listener?.onTimeStampClicked(view.id, value)}
+            v?.let { view ->  this.listener?.onTimeSpanClicked(view.id, value)}
         }
     }
 }

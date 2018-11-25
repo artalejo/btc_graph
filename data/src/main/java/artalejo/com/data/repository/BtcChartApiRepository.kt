@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class BtcChartApiRepository @Inject constructor(private val btcChartService: BtcChartService): BtcChartRepository {
 
-    override fun fetchBtcChartData(timestamp: String): Single<BtcDataInfo> {
-        return btcChartService.getBtcChartData(timestamp).map { it.toBtcDataInfo() }
+    override fun fetchBtcChartData(timespan: String): Single<BtcDataInfo> {
+        return btcChartService.getBtcChartData(timespan).map { it.toBtcDataInfo() }
     }
 
 }
