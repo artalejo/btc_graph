@@ -16,6 +16,7 @@
         tools:text="All time"
         android:textColor="@color/colorAccent"
         android:padding="@dimen/custom_timestamp_btn_padding"
+        android:textSize="@dimen/custom_timestamp_btn_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

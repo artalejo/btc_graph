@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="custom_timestamp_btn_padding">12dp</dimen>
+    <dimen name="custom_timestamp_btn_text_size">20sp</dimen>
+    <dimen name="custom_chart_timestamp_button_width">120dp</dimen>
+
+    <!-- error view stub-->
+    <dimen name="error_image_size">180dp</dimen>
+    <dimen name="error_title_size">24sp</dimen>
+    <dimen name="error_try_again_text_size">20sp</dimen>
+    <dimen name="error_try_again_padding">20dp</dimen>
+</resources>
