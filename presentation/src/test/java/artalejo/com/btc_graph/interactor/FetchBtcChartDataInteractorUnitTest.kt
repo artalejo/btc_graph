@@ -38,7 +38,7 @@ class FetchBtcChartDataInteractorUnitTest {
 
     @Test
     fun onFetchBtcPriceDataSuccess() {
-        val btcDataInfo = BtcDataInfo("status_ok", "name", "USD", "1week", "test description", listOf())
+        val btcDataInfo = BtcDataInfo("test description", listOf())
         whenever(mockedBtcChartRepository.fetchBtcChartData(timestamp)).thenReturn(Single.just(btcDataInfo))
         fetchBtcDataInteractor.fetchBtcChartData(timestamp).test().assertValue(btcDataInfo)
     }

@@ -10,5 +10,4 @@ data class BtcDataEntity(
         var description: String = "",
         var values: List<BtcValueEntity> = listOf())
 
-fun BtcDataEntity.toBtcDataInfo() = BtcDataInfo(this.status, this.name, this.unit,
-        this.period, this.description, this.values.map { it.toBtcValueInfo() })
+fun BtcDataEntity.toBtcDataInfo() = BtcDataInfo(this.description, this.values.map { it.toBtcValueInfo() })

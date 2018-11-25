@@ -106,7 +106,7 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
         lineData.setDrawValues(false)
         btc_chart.data = lineData
         // Chart configuration
-        btc_chart.description.text = btcData.name
+        btc_chart.description.isEnabled = false
         btc_chart.xAxis.isEnabled = false
         btc_chart.axisRight.isEnabled = false
         btc_chart.setBorderColor(R.color.colorAccent)
