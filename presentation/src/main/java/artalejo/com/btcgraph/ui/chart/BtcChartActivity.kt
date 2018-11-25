@@ -76,10 +76,10 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
                             populateBtcDataChart(btcData)
                             btc_chart.setVisible()
                             btc_data_progress_bar.setGone()
+                            hideErrorView()
                         } ?: run { ErrorState(getString(R.string.retrieve_data_error)) }
                     }
                     is LoadingState -> {
-                        hideErrorView()
                         btc_chart.setGone()
                         btc_data_progress_bar.setVisible()
                     }
@@ -102,7 +102,7 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
         val btcDataSet = LineDataSet(btcData.values, getTimestampTitle(timestampSelected))
         btcDataSet.setDrawCircles(false)
         btcDataSet.setDrawFilled(true)
-
+        btcDataSet.color = R.color.colorPrimaryDark
         val lineData = LineData(btcDataSet)
         lineData.setDrawValues(false)
         btc_chart.data = lineData
@@ -110,7 +110,6 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
         btc_chart.description.text = btcData.description
         btc_chart.xAxis.isEnabled = false
         btc_chart.axisRight.isEnabled = false
-        btc_chart.setBorderColor(R.color.colorAccent)
         btc_chart.setScaleEnabled(false)
         btc_chart.setDrawGridBackground(false)
         btc_chart.isDragEnabled = false
@@ -126,12 +125,20 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
         error_view_stub?.let { it.inflate() } ?: run {
             findViewById<ViewStub>(R.id.error_stub_id).setVisible()
         }
-        error_try_again?.setOnClickListener { fetchBtcChartData(timestampSelected) }
+
+        try_again_data_progress_bar.setGone()
+        error_try_again?.setOnClickListener {
+            try_again_data_progress_bar.setVisible()
+            fetchBtcChartData(timestampSelected)
+        }
     }
 
     private fun hideErrorView() {
-        // The view stub is null when it has already been inflated
-        if (error_view_stub == null)  findViewById<ViewStub>(R.id.error_stub_id).setGone()
+        error_view_stub?.let {
+            error_view_stub.setGone()
+        } ?: run {
+            findViewById<ViewStub>(R.id.error_stub_id).setGone()
+        }
     }
 
     override fun onDestroy() {

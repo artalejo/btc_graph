@@ -11,7 +11,12 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
+// Changing the timeout to a lower value so that it does not take long much time to show the
+// error view when attempting to do a request when no connection ( airplane mode...)
+const val TIMEOUT = 10L
 
 @Module
 class DataModule {
@@ -19,7 +24,11 @@ class DataModule {
     @Provides
     @Singleton
     fun providesRetrofitInterface(): Retrofit {
-        val okHttpClient = OkHttpClient.Builder().build()
+        val okHttpClient = OkHttpClient.Builder()
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .build()
 
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
