@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">btc_graph</string>
+    <string name="app_name">Btc Market price</string>
     <string name="something_wrong_message">Whoops, looks like something went wrong</string>
     <string name="try_again_question">Try again</string>
     <string name="retrieve_data_error">There has been an error retrieving your data</string>

@@ -8,4 +8,4 @@ sealed class BtcChartModel {
 
 data class DataRetrievedState(override val data: BtcChartViewEntity?) : BtcChartModel()
 data class LoadingState(override val data: BtcChartViewEntity? = null) : BtcChartModel()
-data class ErrorState(val errorMessage: String, override val data: BtcChartViewEntity? = null) : BtcChartModel()
+data class ErrorState(val errorMessage: String? = null, override val data: BtcChartViewEntity? = null) : BtcChartModel()

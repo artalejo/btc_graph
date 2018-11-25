@@ -1,14 +1,13 @@
 package artalejo.com.btcgraph.ui.entities
 
 import artalejo.com.domain.entities.BtcDataInfo
+import com.github.mikephil.charting.data.Entry
 
 data class BtcChartViewEntity(
-        val status: String,
         val name: String,
-        val unit: String,
-        val period: String,
         val description: String,
-        val values: List<BtcValueViewEntity>)
+        val values: List<Entry>)
 
-fun BtcDataInfo.toBtcChartViewEntity() = BtcChartViewEntity(this.status, this.name, this.unit,
-        this.period, this.description, this.values.map { it.toBtcChartValueViewEntity() })
+fun BtcDataInfo.toBtcChartViewEntity() = BtcChartViewEntity(
+        this.name, this.description,
+        this.values.map { Entry(it.x.toFloat(), it.y.toFloat()) })

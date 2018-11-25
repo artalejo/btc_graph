@@ -4,5 +4,5 @@ import artalejo.com.domain.entities.BtcDataInfo
 import io.reactivex.Single
 
 interface BtcChartRepository {
-    fun getBtcChartData(timestamp: String): Single<BtcDataInfo>
+    fun fetchBtcChartData(timestamp: String): Single<BtcDataInfo>
 }

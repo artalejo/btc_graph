@@ -20,9 +20,9 @@ class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
     private val defaultTitle = context.getString(R.string.timestamp_year_title)
     private val defaultValue = context.getString(R.string.timestamp_year_value)
     private lateinit var title: String
-    lateinit var value: String
-    private var isBtnSelected: Boolean = false
     private var listener : OnTimeStampClickedListener? = null
+    private var isBtnSelected: Boolean = false
+    lateinit var value: String
 
     constructor(context: Context): super(context) {
         initialize()
@@ -46,8 +46,8 @@ class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
 
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ChartTimestampButton, defStyleAttr, 0)
-            title = typedArray.getString(R.styleable.ChartTimestampButton_title)?.let { it } ?: defaultTitle
-            value = typedArray.getString(R.styleable.ChartTimestampButton_value)?.let { it } ?: defaultValue
+            title = typedArray.getString(R.styleable.ChartTimestampButton_title) ?: defaultTitle
+            value = typedArray.getString(R.styleable.ChartTimestampButton_value) ?: defaultValue
             isBtnSelected = typedArray.getBoolean(R.styleable.ChartTimestampButton_selected, false)
             setupInitialValues()
         }
@@ -76,7 +76,9 @@ class ChartTimestampButton : ConstraintLayout, View.OnClickListener{
     }
 
     override fun onClick(v: View?) {
-        setSelectedMode()
-        v?.let { view ->  this.listener?.onTimeStampClicked(view.id, value)}
+        if (!isBtnSelected) {
+            setSelectedMode()
+            v?.let { view ->  this.listener?.onTimeStampClicked(view.id, value)}
+        }
     }
 }

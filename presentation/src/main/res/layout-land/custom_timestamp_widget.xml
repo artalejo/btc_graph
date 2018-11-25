@@ -77,7 +77,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/timestamp_six_months_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timestamp_six_months_btn"
-        app:selected="true"
+        app:selected="false"
         app:title="@string/timestamp_year_title"
         app:value="@string/timestamp_year_value" />
 

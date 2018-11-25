@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/timestamp_two_weeks_btn"
         app:layout_constraintTop_toTopOf="@+id/timestamp_six_months_btn"
-        app:selected="true"
+        app:selected="false"
         app:title="@string/timestamp_year_title"
         app:value="@string/timestamp_year_value" />
 

@@ -11,7 +11,6 @@ import artalejo.com.btcgraph.ui.custom.ChartTimestampWidget
 import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
 import artalejo.com.btcgraph.ui.extensions.setGone
 import artalejo.com.btcgraph.ui.extensions.setVisible
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.activity_btc_chart.*
@@ -21,6 +20,8 @@ import javax.inject.Inject
 class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampChangedListener {
 
     companion object {
+        private const val CURRENT_BTN_SELECTED = "CURRENT_BTN_SELECTED"
+        private const val TIMESTAMP_SELECTED = "TIMESTAMP_SELECTED"
         private const val CHART_ANIM_DURATION = 800
         @JvmStatic fun getIntent(context: Context) = Intent(context, BtcChartActivity::class.java)
     }
@@ -28,16 +29,30 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
     @Inject lateinit var btcChartViewModel: BtcChartViewModel
     override var layout = R.layout.activity_btc_chart
 
-    private lateinit var timestampSelected : String
+    private lateinit var timestampSelected: String
+    private val stateObserver = Observer<BtcChartModel>(function = handleStateChanges())
 
     override fun onViewLoaded(savedInstanceState: Bundle?) {
+        checkSavedInstanceState(savedInstanceState)
         setUpViewModelStateObserver()
         setUpChartTimestampWidget()
         fetchBtcChartData(timestampSelected)
     }
 
+    private fun checkSavedInstanceState(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            this.timestampSelected = it.getString(TIMESTAMP_SELECTED, getString(R.string.timestamp_year_value))
+            timestamp_widget.selectSelectedButton(it.getInt(CURRENT_BTN_SELECTED, R.id.timestamp_year_btn))
+        } ?: run {
+            this.timestampSelected = getString(R.string.timestamp_year_value)
+            timestamp_widget.selectSelectedButton(R.id.timestamp_year_btn)
+        }
+    }
+
+    private fun setUpViewModelStateObserver() =
+            btcChartViewModel.btcLiveData.observe(this, stateObserver)
+
     private fun setUpChartTimestampWidget() {
-        this.timestampSelected = getString(R.string.timestamp_year_value)
         timestamp_widget.setListener(this)
     }
 
@@ -45,51 +60,56 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
         btcChartViewModel.loadBtcChartData(timestamp)
     }
 
-    private fun setUpViewModelStateObserver()=
-            btcChartViewModel.btcLiveData.observe(this, stateObserver)
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString(TIMESTAMP_SELECTED, timestampSelected)
+        outState?.putInt(CURRENT_BTN_SELECTED, timestamp_widget.currentIdSelected)
+    }
 
-    private val stateObserver = Observer<BtcChartModel> { state ->
-        state?.let {
-            when (state) {
-                is DataRetrievedState -> {
-                    it.data?.let {
-                        btcData -> populateBtcDataChart(btcData)
+    private fun handleStateChanges(): (BtcChartModel?) -> Unit {
+        return { state ->
+            state?.let {
+                when (state) {
+                    is DataRetrievedState -> {
+                        it.data?.let { btcData ->
+                            populateBtcDataChart(btcData)
+                            btc_chart.setVisible()
+                            btc_data_progress_bar.setGone()
+                        } ?: run { ErrorState(getString(R.string.retrieve_data_error)) }
+                    }
+                    is LoadingState -> {
+                        hideErrorView()
+                        btc_chart.setGone()
+                        btc_data_progress_bar.setVisible()
+                    }
+                    is ErrorState -> {
+                        setUpErrorViewStub()
                         btc_chart.setVisible()
                         btc_data_progress_bar.setGone()
-                    } ?: run { ErrorState(getString(R.string.retrieve_data_error)) }
-                }
-                is LoadingState -> {
-                    hideErrorView()
-                    btc_chart.setGone()
-                    btc_data_progress_bar.setVisible()
-                }
-                is ErrorState -> {
-                    setUpErrorViewStub()
-                    btc_chart.setVisible()
-                    btc_data_progress_bar.setGone()
+                    }
                 }
             }
         }
     }
 
     private fun populateBtcDataChart(btcData: BtcChartViewEntity) {
-        val entries = arrayListOf<Entry>()
-        btcData.values.forEach { entries.add(Entry(it.x.toFloat(), it.y.toFloat())) }
-        configureBtcChart(entries, btcData.description)
+        configureBtcChart(btcData)
         btc_chart.invalidate()
     }
 
-    private fun configureBtcChart(entries : ArrayList<Entry>, description: String) {
-        val btcDataSet = LineDataSet(entries, description)
+    private fun configureBtcChart(btcData: BtcChartViewEntity) {
+        val btcDataSet = LineDataSet(btcData.values, btcData.description)
         btcDataSet.setDrawCircles(false)
         btcDataSet.setDrawFilled(true)
+
         val lineData = LineData(btcDataSet)
         lineData.setDrawValues(false)
         btc_chart.data = lineData
+        // Chart configuration
+        btc_chart.description.text = btcData.name
         btc_chart.xAxis.isEnabled = false
         btc_chart.axisRight.isEnabled = false
         btc_chart.setBorderColor(R.color.colorAccent)
-        btc_chart.description.isEnabled = false
         btc_chart.setScaleEnabled(false)
         btc_chart.setDrawGridBackground(false)
         btc_chart.isDragEnabled = false

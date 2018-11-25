@@ -13,7 +13,7 @@ class ChartTimestampWidget : ConstraintLayout, ChartTimestampButton.OnTimeStampC
         fun onTimestampChanged(timestamp: String)
     }
 
-    private var currentIdSelected: Int = R.id.timestamp_year_btn
+    var currentIdSelected: Int = R.id.timestamp_year_btn
     private var listener : OnChartTimeStampChangedListener? = null
 
     constructor(context: Context): super(context) {
@@ -32,13 +32,7 @@ class ChartTimestampWidget : ConstraintLayout, ChartTimestampButton.OnTimeStampC
         LayoutInflater
                 .from(context)
                 .inflate(R.layout.custom_timestamp_widget, this, true)
-        setUpInitialValues()
         setUpListeners()
-    }
-
-    private fun setUpInitialValues() {
-        timestamp_year_btn.setSelectedMode()
-        this.currentIdSelected = R.id.timestamp_year_btn
     }
 
     private fun setUpListeners() {
@@ -66,4 +60,8 @@ class ChartTimestampWidget : ConstraintLayout, ChartTimestampButton.OnTimeStampC
         findViewById<ChartTimestampButton>(this.currentIdSelected).setDeselectedMode()
     }
 
+    fun selectSelectedButton(selectedId: Int) {
+        this.currentIdSelected = selectedId
+        findViewById<ChartTimestampButton>(selectedId).setSelectedMode()
+    }
 }

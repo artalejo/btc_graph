@@ -49,7 +49,10 @@ dependencies {
     implementation libs.rxAndroid
     implementation libs.rxKotlin
 
+    // testing
     testImplementation libs.junit
+    testImplementation libs.mockitoInline
+    testImplementation libs.mockitoKotlin
     androidTestImplementation libs.testRunner
     androidTestImplementation libs.espressoCore
 }
