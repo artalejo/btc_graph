@@ -70,6 +70,7 @@ dependencies {
     testImplementation libs.mockitoKotlin
     testImplementation "android.arch.core:core-testing:$arch_core_testing"
     androidTestImplementation libs.testRunner
+    androidTestImplementation libs.testRunnerRules
     androidTestImplementation libs.espressoCore
 }
 

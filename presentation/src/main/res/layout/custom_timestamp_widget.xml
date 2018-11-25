@@ -107,7 +107,7 @@
         app:layout_constraintStart_toStartOf="@+id/timestamp_two_months_btn"
         app:layout_constraintTop_toTopOf="@+id/timestamp_two_years_btn"
         app:selected="false"
-        app:title="@string/timestamp_all_title"
+        app:title="@string/timestamp_all_time_title"
         app:value="@string/timestamp_all_time_value" />
 
 </android.support.constraint.ConstraintLayout>

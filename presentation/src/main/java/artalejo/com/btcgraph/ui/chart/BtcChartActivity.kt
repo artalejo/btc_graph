@@ -9,6 +9,7 @@ import artalejo.com.btc_graph.R
 import artalejo.com.btcgraph.ui.base.BaseActivity
 import artalejo.com.btcgraph.ui.custom.ChartTimestampWidget
 import artalejo.com.btcgraph.ui.entities.BtcChartViewEntity
+import artalejo.com.btcgraph.ui.extensions.getTimestampTitle
 import artalejo.com.btcgraph.ui.extensions.setGone
 import artalejo.com.btcgraph.ui.extensions.setVisible
 import com.github.mikephil.charting.data.LineData
@@ -98,7 +99,7 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
     }
 
     private fun configureBtcChart(btcData: BtcChartViewEntity) {
-        val btcDataSet = LineDataSet(btcData.values, btcData.description)
+        val btcDataSet = LineDataSet(btcData.values, getTimestampTitle(timestampSelected))
         btcDataSet.setDrawCircles(false)
         btcDataSet.setDrawFilled(true)
 
@@ -106,7 +107,7 @@ class BtcChartActivity: BaseActivity(), ChartTimestampWidget.OnChartTimeStampCha
         lineData.setDrawValues(false)
         btc_chart.data = lineData
         // Chart configuration
-        btc_chart.description.isEnabled = false
+        btc_chart.description.text = btcData.description
         btc_chart.xAxis.isEnabled = false
         btc_chart.axisRight.isEnabled = false
         btc_chart.setBorderColor(R.color.colorAccent)

@@ -26,6 +26,7 @@ buildscript {
                 daggerCompiler  : ('com.google.dagger:dagger-compiler:' + dagger_version),
                 daggerProcessor : ('com.google.dagger:dagger-android-processor:' + dagger_version),
                 testRunner      : ('com.android.support.test:runner:' + test_runner_version),
+                testRunnerRules : ('com.android.support.test:rules:' + test_runner_version),
                 espressoCore    : ('com.android.support.test.espresso:espresso-core:' + espresso_core_version),
                 kotlinJdk       : ('org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + kotlin_version),
                 appCompat       : ('com.android.support:appcompat-v7:' + support_version),
